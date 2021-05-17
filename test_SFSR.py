@@ -4,7 +4,7 @@ from glob import glob
 from torchvision import transforms
 from torchvision.utils import save_image
 from model.model import generator
-from vae.VAE import *
+from predataset.VAE import *
 from PIL import Image
 
 
