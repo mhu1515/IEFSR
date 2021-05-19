@@ -1,7 +1,3 @@
-'''*-coding:utf-8 *-
- @Time     : 2020/11/1118:25
- @Author   : florrie(zfh)
-'''
 import os
 import sys
 from PIL import Image, ImageQt
@@ -41,7 +37,7 @@ class FaceSRMainWindow(Ui_MainWindow, QMainWindow):
         self.img = None
         self.setWindowIcon(QIcon('UIfile/logo.png'))
         self.initUI(self)
-        self.algorithm = "SFSR"
+        self.algorithm = "IEFSR"
         self.scale = 4
         self.screenshot_act.triggered.connect(self.self_detect_clicked)
 
@@ -155,8 +151,8 @@ class FaceSRMainWindow(Ui_MainWindow, QMainWindow):
             if self.catImg is None:
                 self.catImg = self.img
 
-            if self.algorithm == "SFSR":
-                self.modeName = "SFSR"
+            if self.algorithm == "IEFSR":
+                self.modeName = "IEFSR"
                 print("mode :", self.algorithm)
             # elif self.algorithm == "VESPCN":
             #     self.modeName = "Mode2"
@@ -166,7 +162,7 @@ class FaceSRMainWindow(Ui_MainWindow, QMainWindow):
             # elif self.algorithm == "Bicubic":
             #     self.modeName = "Mode3"
             else:
-                self.modeName = "SFSR"
+                self.modeName = "IEFSR"
                 self.train_mode = 7
             self.start_time = time.time()  # 开始计时
             # 设置线程的scale参数
