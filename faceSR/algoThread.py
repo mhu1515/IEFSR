@@ -62,11 +62,11 @@ class algoThread(QThread):
 
         Debuger.debug("运行算法")
 
-        mbllen = Network.build_mbllen((None, None, 3))
+        coarse_LR = Network.build_coarse_LR((None, None, 3))
         net_path = os.path.join(curr_path, 'pretrained_models', '200_dark_base.h5')
-        mbllen.load_weights(net_path)
+        coarse_LR.load_weights(net_path)
         opt = keras.optimizers.Adam(lr=2 * 1e-04, beta_1=0.9, beta_2=0.999, epsilon=1e-08)
-        mbllen.compile(loss='mse', optimizer=opt)
+        coarse_LR.compile(loss='mse', optimizer=opt)
 
         flag = 0
         lowpercent = 5
