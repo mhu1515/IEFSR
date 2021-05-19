@@ -29,15 +29,9 @@ def test(img_path):
     x_image = x_image.unsqueeze(0).to(device)
 
     with torch.no_grad():
-        # 增亮的
-        # save_enc_model = "./save_model/save_model-Enli/" + "enc.pth"
-        # save_gen_model = "./save_model/save_model-Enli/" + "gen.pth"
-
-        # save_enc_model = "./save_model/FFHQ_light_train_new_discriminator/" + "11_enc.pth"
-        # save_gen_model = "./save_model/FFHQ_light_train_new_discriminator/" + "11_gen.pth"
-
-        save_enc_model = "./save_model/Celeba_Mask_light_train_ep12_new_discriminator/" + "11_enc.pth"
-        save_gen_model = "./save_model/Celeba_Mask_light_train_ep12_new_discriminator/" + "11_gen.pth"
+    
+        save_enc_model = "./save_model/" + "9_enc.pth"
+        save_gen_model = "./save_model/" + "9_gen.pth"
 
         encoder = gaussian_resnet_encoder(image_size=32).to(device)
         encoder = nn.DataParallel(encoder)
@@ -82,26 +76,20 @@ def test_encoder(img_path):
         encoder = gaussian_resnet_encoder(image_size=32).to(device)
         state_enc_dict = torch.load(save_enc_model)
         try:
-            new_state_dict = {k: v for k, v in state_enc_dict.items()}
-            # from collections import OrderedDict
-            # new_state_dict = OrderedDict()
-            # for k, v in state_enc_dict.items():
-            #     name = 'module.' + k  # add `module.`
-            #     new_state_dict[name] = v
+            from collections import OrderedDict
+            new_state_dict = OrderedDict()
+            for k, v in state_enc_dict.items():
+                name = 'module.' + k  # add `module.`
+                new_state_dict[name] = v
             # load params
-            # model.load_state_dict(new_state_dict)
+            model.load_state_dict(new_state_dict)
             encoder.load_state_dict(new_state_dict)
             encoder.eval()
             z, mu, logvar = encoder(x_image)
         except Exception as e:
             print(e)
 
-
-# test('./', './test/LR/000080.jpg')
-# all_list = glob('./dataset/Celeba-Mask/test/LR/test-32/*.jpg')
-# all_list = glob('./dataset/test/LR/*.jpg')
 all_list = glob('./test_2_32/*.*')
 
 for i in all_list:
     test(i)
-    # test_encoder(i)
