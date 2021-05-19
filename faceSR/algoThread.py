@@ -13,8 +13,8 @@ from torchvision import transforms
 from utils import *
 import Debuger
 import keras
-from models import MBLLEN as Network
-from models import MBLLEN_utils as utls
+from models import coarse_LR as Network
+from models import coarse_LR_utils as utls
 
 curr_path = os.path.abspath(os.path.dirname(__file__))
 
