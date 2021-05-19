@@ -1,14 +1,10 @@
-'''*-coding:utf-8 *-
- @Time     : 2020/11/2522:14
- @Author   : florrie(zfh)
-'''
 import sys
 import os
 from PyQt5.QtCore import *
 from PyQt5.QtGui import QPixmap
-from models.VAE import *
+from models.LR_encoder import *
 from PIL import Image
-from models.SFSR import generator
+from models.IEFSR import generator
 from torchvision import transforms
 from utils import *
 import Debuger
